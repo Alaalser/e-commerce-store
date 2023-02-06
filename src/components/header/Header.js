@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { FaTimes } from "react-icons/fa";
@@ -14,6 +14,10 @@ const Header = () => {
 
   const hideMenu = () => {
     setShowMenu(false);
+  };
+
+  const activeLink = ({ isActive }) => {
+    return isActive ? `${styles.active}` : "";
   };
 
   return (
@@ -41,17 +45,27 @@ const Header = () => {
               <FaTimes size={22} color="#fff" onClick={hideMenu} />
             </li>
             <li>
-              <Link to="/">Home</Link>
+              <NavLink to="/" className={activeLink}>
+                Home
+              </NavLink>
             </li>
             <li>
-              <Link to="/contact">Contact Us</Link>
+              <NavLink to="/contact" className={activeLink}>
+                Contact Us
+              </NavLink>
             </li>
           </ul>
           <div className={styles["header-right"]} onClick={hideMenu}>
             <span className={styles.links}>
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
-              <Link to="/order-history">My Orders</Link>
+              <NavLink to="/login" className={activeLink}>
+                Login
+              </NavLink>
+              <NavLink to="/register" className={activeLink}>
+                Register
+              </NavLink>
+              <NavLink to="/order-history" className={activeLink}>
+                My Orders
+              </NavLink>
             </span>
             {CartIcon}
           </div>
