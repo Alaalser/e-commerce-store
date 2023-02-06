@@ -52,10 +52,6 @@ header {
 
     span {
       margin: 0 5px;
-
-      p {
-        color: #fff;
-      }
     }
 
     .links a {
@@ -125,20 +121,6 @@ header {
 
       .header-right {
         display: block;
-        .cart {
-          // display: block;
-          // padding: 5px 0;
-          border-bottom: 1px solid #333;
-          // a {
-          //   position: relative;
-          //   p {
-          //     position: absolute;
-          //     top: -1rem;
-          //     left: 5rem;
-          //     font-weight: 500;
-          //   }
-          // }
-        }
 
         .links {
           display: block;
@@ -165,7 +147,7 @@ header {
       }
     }
     .header {
-      padding: 1rem;
+      padding: 0 1rem;
     }
   }
 }
