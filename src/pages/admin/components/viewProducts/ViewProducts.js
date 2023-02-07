@@ -1,5 +1,5 @@
 import { deleteDoc, doc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db, storage } from "../../../../firebase/config";
@@ -86,8 +86,8 @@ const ViewProducts = () => {
             {products.map((product, index) => {
               const { id, name, price, imageURL, category } = product;
               return (
-                <tbody>
-                  <tr key={id}>
+                <tbody key={id}>
+                  <tr>
                     <td>{index + 1}</td>
                     <td>
                       <img
