@@ -4,16 +4,16 @@ import Card from "../../components/card/Card";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Loader from "../../components/loader/Loader";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/config";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [displayName, setDisplayName] = useState("");
 
   const navigate = useNavigate();
 
@@ -25,11 +25,11 @@ const Register = () => {
     setIsLoading(true);
 
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
+      .then(async (userCredential) => {
         setIsLoading(false);
         toast.success("Registration Successful...");
+        await updateProfile(auth.currentUser, { displayName });
+
         navigate("/login");
       })
       .catch((error) => {
@@ -40,7 +40,6 @@ const Register = () => {
 
   return (
     <>
-      <ToastContainer />
       {isLoading && <Loader />}
       <section className={`container ${styles.auth}`}>
         <Card>
@@ -50,6 +49,13 @@ const Register = () => {
             <form onSubmit={registerUser}>
               <input
                 type="text"
+                placeholder="Name"
+                required
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+              />
+              <input
+                type="email"
                 placeholder="Email"
                 required
                 value={email}

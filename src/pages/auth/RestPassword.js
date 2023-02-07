@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import resetImg from "../../assets/forgot.png";
 import Card from "../../components/card/Card";
 import { useState } from "react";
-import "react-toastify/dist/ReactToastify.css";
 import { auth } from "../../firebase/config";
 import { sendPasswordResetEmail } from "firebase/auth";
 import Loader from "../../components/loader/Loader";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const RestPassword = () => {
   const [email, setEmail] = useState("");
@@ -31,8 +29,6 @@ const RestPassword = () => {
 
   return (
     <>
-      <ToastContainer />
-
       {isLoading && <Loader />}
       <section className={`container ${styles.auth}`}>
         <div className={styles.img}>

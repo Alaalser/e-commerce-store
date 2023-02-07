@@ -11,8 +11,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import Loader from "../../components/loader/Loader";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,7 +26,6 @@ const Login = () => {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
         setIsLoading(false);
         toast.success("Login Successful...");
         navigate("/");
@@ -43,7 +41,6 @@ const Login = () => {
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        const user = result.user;
         toast.success("Login Successfully");
         navigate("/");
       })
@@ -54,7 +51,6 @@ const Login = () => {
 
   return (
     <>
-      <ToastContainer />
       {isLoading && <Loader />}
       <section className={`container ${styles.auth}`}>
         <div>
