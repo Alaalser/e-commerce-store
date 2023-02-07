@@ -2,7 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home, Contact, Login, Register, RestPassword, Admin } from "./pages";
 import { Header, Footer } from "./components";
 import { ToastContainer } from "react-toastify";
-import AdminPrivateRoute from "./components/adminPrivateRoute/AdminPrivateRoute";
+import AdminPrivateRoute, {
+  AdminOnlyLink,
+} from "./components/adminPrivateRoute/AdminPrivateRoute";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
