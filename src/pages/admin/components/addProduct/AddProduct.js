@@ -1,12 +1,19 @@
-import { addDoc, collection, Timestamp } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { addDoc, collection, doc, setDoc, Timestamp } from "firebase/firestore";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db, storage } from "../../../../firebase/config";
-import styles from "./AddProduct.module.scss";
+import Card from "../../../../components/card/Card";
 import Loader from "../../../../components/loader/Loader";
-import { Card } from "../../../../components";
+import styles from "./AddProduct.module.scss";
+import { selectProducts } from "../../../../redux/slice/productSlice";
 
 const categories = [
   { id: 1, name: "Laptop" },
@@ -31,7 +38,6 @@ const AddProduct = () => {
 
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
